@@ -35,7 +35,7 @@ public class OAuth2TokenService : IOAuth2TokenService
             { "grant_type", "authorization_code" },
             { "client_id", values["client_id"] },
             { "redirect_uri", ApplicationConstants.RedirectUri },
-            { "code_verifier", values["code_challenge"] },
+            { "code_verifier", state },
             { "code", code }
         };
 

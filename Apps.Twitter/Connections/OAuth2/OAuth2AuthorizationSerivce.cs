@@ -15,7 +15,7 @@ public class OAuth2AuthorizationSerivce : IOAuth2AuthorizeService
             { "redirect_uri", ApplicationConstants.RedirectUri},
             { "scope", ApplicationConstants.Scope},
             { "state", values["state"]},
-            { "code_challenge", values["code_challenge"]},
+            { "code_challenge", values["state"]},
             { "code_challenge_method", "plain"},
         };
         return QueryHelpers.AddQueryString(UrlConstants.TwitterOAuthUrl, parameters);

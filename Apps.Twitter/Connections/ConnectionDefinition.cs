@@ -23,7 +23,11 @@ public class ConnectionDefinition : IConnectionDefinition
             Name = "OAuth2",
             AuthenticationType = ConnectionAuthenticationType.OAuth2,
             ConnectionUsage = ConnectionUsage.Actions,
-            ConnectionProperties = Enumerable.Empty<ConnectionProperty>()
+            ConnectionProperties = new List<ConnectionProperty>()
+            {
+                new("client_id"),
+                new("secret"),
+            }
         }
     };
 }
