@@ -22,12 +22,10 @@ public class TweetActions
     [Action("Create Tweet", Description = "Create tweet on your twitter page")]
     public Task CreateTweet(
         IEnumerable<AuthenticationCredentialsProvider> authenticationCredentialsProviders,
-        [ActionParameter] byte[] input)
+        [ActionParameter] string tweetText)
     {
-        var textInput = Encoding.UTF8.GetString(input);
-        
         var request = new TwitterRestRequest(ApiEndpoints.TweetsEndpoint, Method.Post, authenticationCredentialsProviders);
-        request.AddJsonBody(new CreateTweet { Text = textInput });
+        request.AddJsonBody(new CreateTweet { Text = tweetText });
 
         return _twitterRestClient.SendTwitterRequest(request);
     }
