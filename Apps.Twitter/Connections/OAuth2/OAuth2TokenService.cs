@@ -74,7 +74,8 @@ public class OAuth2TokenService : IOAuth2TokenService
         var bodyParameters = new Dictionary<string, string>
         {
             { "token", values["access_token"] },
- //           { "client_id", values["client_id"] }
+            { "client_id", values["client_id"] },
+            { "token_type_hint", "access_token" },
         };
 
         await ExecuteRequest(requestUrl, developerCredentials, bodyParameters, CancellationToken.None);
@@ -96,7 +97,7 @@ public class OAuth2TokenService : IOAuth2TokenService
         request.AddHeader("Authorization", authHeader);
         bodyParameters.ToList().ForEach(x => request.AddParameter(x.Key, x.Value));
 
-        return await _twitterClient.ExecuteAsync(request, cancellationToken);
+        return await _twitterClient.SendTwitterRequest(request, cancellationToken);
     }
 
     private async Task<Dictionary<string, string>> GetDictionaryResponse(string requestUrl,

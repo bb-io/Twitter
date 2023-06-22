@@ -29,7 +29,7 @@ public class TweetActions
         var request = new TwitterRestRequest(ApiEndpoints.TweetsEndpoint, Method.Post, authenticationCredentialsProviders);
         request.AddJsonBody(new CreateTweet { Text = textInput });
 
-        return _twitterRestClient.ExecuteAsync(request);
+        return _twitterRestClient.SendTwitterRequest(request);
     }
     
     [Action("Remove Tweet", Description = "Remove specified tweet from the page")]
@@ -40,6 +40,6 @@ public class TweetActions
         var endpoint = $"{ApiEndpoints.TweetsEndpoint}/{tweetId}";
         var request = new TwitterRestRequest(endpoint, Method.Delete, authenticationCredentialsProviders);
 
-        return _twitterRestClient.ExecuteAsync(request);
+        return _twitterRestClient.SendTwitterRequest(request);
     }
 }
