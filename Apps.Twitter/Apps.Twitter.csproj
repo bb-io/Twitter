@@ -4,9 +4,9 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Product>Twitter</Product>
-        <Version>1.0.1</Version>
-        <Description>Social networking and microblogging service</Description>
+        <Product>X</Product>
+        <Version>1.0.2</Version>
+        <Description>Formerly Twitter. Social networking and microblogging service</Description>
         <AssemblyName>Apps.Twitter</AssemblyName>
     </PropertyGroup>
 
@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png"></EmbeddedResource>
+        <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.jpeg"></EmbeddedResource>
     </ItemGroup>
     
 </Project>
