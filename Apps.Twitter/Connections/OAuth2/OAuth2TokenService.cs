@@ -3,16 +3,18 @@ using System.Text.Json;
 using Apps.Twitter.Constants;
 using Apps.Twitter.Dto;
 using Apps.Twitter.RestSharp;
+using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication.OAuth2;
+using Blackbird.Applications.Sdk.Common.Invocation;
 using RestSharp;
 
 namespace Apps.Twitter.Connections.OAuth2;
 
-public class OAuth2TokenService : IOAuth2TokenService
+public class OAuth2TokenService : BaseInvocable, IOAuth2TokenService
 {
     private readonly TwitterRestClient _twitterClient;
 
-    public OAuth2TokenService()
+    public OAuth2TokenService(InvocationContext invocationContext) : base(invocationContext)
     {
         _twitterClient = new();
     }
@@ -34,7 +36,7 @@ public class OAuth2TokenService : IOAuth2TokenService
         {
             { "grant_type", "authorization_code" },
             { "client_id", values["client_id"] },
-            { "redirect_uri", ApplicationConstants.RedirectUri },
+            { "redirect_uri", $"{InvocationContext.UriInfo.BridgeServiceUrl.ToString().TrimEnd('/')}/AuthorizationCode" },
             { "code_verifier", state },
             { "code", code }
         };

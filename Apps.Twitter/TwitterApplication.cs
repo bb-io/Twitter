@@ -1,10 +1,11 @@
 ﻿using Apps.Twitter.Connections.OAuth2;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication.OAuth2;
+using Blackbird.Applications.Sdk.Common.Invocation;
 
 namespace Apps.Twitter;
 
-public class TwitterApplication : IApplication
+public class TwitterApplication : BaseInvocable, IApplication
 {
     public string Name
     {
@@ -14,7 +15,7 @@ public class TwitterApplication : IApplication
 
     private readonly Dictionary<Type, object> _typesInstances;
 
-    public TwitterApplication()
+    public TwitterApplication(InvocationContext invocationContext) : base(invocationContext)
     {
         _typesInstances = CreateTypesInstances();
     }
@@ -33,8 +34,8 @@ public class TwitterApplication : IApplication
     {
         return new Dictionary<Type, object>
         {
-            { typeof(IOAuth2AuthorizeService), new OAuth2AuthorizationSerivce() },
-            { typeof(IOAuth2TokenService), new OAuth2TokenService() }
+            { typeof(IOAuth2AuthorizeService), new OAuth2AuthorizationSerivce(InvocationContext) },
+            { typeof(IOAuth2TokenService), new OAuth2TokenService(InvocationContext) }
         };
     }
 }
