@@ -2,11 +2,18 @@
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication.OAuth2;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.Sdk.Common.Metadata;
 
 namespace Apps.Twitter;
 
-public class TwitterApplication : BaseInvocable, IApplication
+public class TwitterApplication : BaseInvocable, IApplication, ICategoryProvider
 {
+    public IEnumerable<ApplicationCategory> Categories
+    {
+        get => [ApplicationCategory.SocialMedia];
+        set { }
+    }
+    
     public string Name
     {
         get => "Twitter";
