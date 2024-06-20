@@ -24,7 +24,20 @@ You can find the instructions on how to create a new app and get the `Client ID`
 5. Establish **X** connection via OAuth.
 6. Click _Connect_.
 
+![connection](image/README/connection.png)
 
+## Actions
+
+- **Create tweet**: Create tweet on your twitter page.
+- **Remove tweet**: Remove specified tweet from the page.
+
+## Example
+
+Here is an example of how you can use the X app in a workflow:
+
+![example](image/README/example.png)
+
+In this example, the workflow starts with the **On message** event from `Slack` app which triggers when a new message is posted in the channel. Then, the workflow uses the **Translate** action to translate the message to a specified language. In the next step we use the **Create tweet** action to post the translated message on your twitter page.
 
 ## Feedback
 
