@@ -25,8 +25,8 @@ public class ConnectionDefinition : IConnectionDefinition
             ConnectionUsage = ConnectionUsage.Actions,
             ConnectionProperties = new List<ConnectionProperty>()
             {
-                new("client_id"),
-                new("secret"),
+                new("client_id") { DisplayName = "Client ID" },
+                new("secret") { DisplayName = "Secret", Sensitive = true },
             }
         }
     };
