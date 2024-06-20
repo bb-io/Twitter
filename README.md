@@ -4,9 +4,27 @@ Blackbird is the new automation backbone for the language technology industry. B
 
 ## Introduction
 
-<!-- begin docs -->
+X is the place to see and join the conversation on what's happening in the world. Follow your interests, share your thoughts, and connect with millions of people.
 
-Documentation coming soon.
+## Before setting up
+
+Before you can connect you need to make sure that:
+
+- You have a X account and you have the credentials to access it.
+- You have `Client ID` and `Client Secret` for the X API.
+
+You can find the instructions on how to create a new app and get the `Client ID` and `Client Secret` [here](https://developer.x.com/en/docs/authentication/oauth-1-0a/api-key-and-secret).
+
+## Connecting
+
+1. Navigate to Apps, and identify the **X** app. You can use search to find it.
+2. Click _Add Connection_.
+3. Name your connection for future reference e.g. 'My X connection'.
+4. Fill in the `Client ID` and `Client Secret` for the X API.
+5. Establish **X** connection via OAuth.
+6. Click _Connect_.
+
+
 
 ## Feedback
 
