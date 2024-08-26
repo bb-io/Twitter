@@ -10,14 +10,10 @@ using RestSharp;
 
 namespace Apps.Twitter.Connections.OAuth2;
 
-public class OAuth2TokenService : BaseInvocable, IOAuth2TokenService
+public class OAuth2TokenService(InvocationContext invocationContext)
+    : BaseInvocable(invocationContext), IOAuth2TokenService
 {
-    private readonly TwitterRestClient _twitterClient;
-
-    public OAuth2TokenService(InvocationContext invocationContext) : base(invocationContext)
-    {
-        _twitterClient = new();
-    }
+    private readonly TwitterRestClient _twitterClient = new();
 
     public Task<Dictionary<string, string>> RequestToken(
         string state,
@@ -28,8 +24,8 @@ public class OAuth2TokenService : BaseInvocable, IOAuth2TokenService
         var requestUrl = UrlConstants.TwitterApiUrl + ApiEndpoints.TokenEndpoint;
         var developerCredentials = new DeveloperCredentials()
         {
-            ClientId = values["client_id"],
-            ClientSecret = values["secret"],
+            ClientId = values[CredNames.ClientId],
+            ClientSecret = values[CredNames.ClientSecret],
         };
         
         var bodyParameters = new Dictionary<string, string>
@@ -50,15 +46,15 @@ public class OAuth2TokenService : BaseInvocable, IOAuth2TokenService
         var requestUrl = UrlConstants.TwitterApiUrl + ApiEndpoints.TokenEndpoint;
         var developerCredentials = new DeveloperCredentials()
         {
-            ClientId = values["client_id"],
-            ClientSecret = values["secret"],
+            ClientId = values[CredNames.ClientId],
+            ClientSecret = values[CredNames.ClientSecret],
         };
         
         var bodyParameters = new Dictionary<string, string>
         {
             { "grant_type", "refresh_token" },
             { "refresh_token", values["refresh_token"] },
-            { "client_id", values["client_id"] },
+            { "client_id", values[CredNames.ClientId] },
         };
         
         return GetDictionaryResponse(requestUrl, developerCredentials, bodyParameters, cancellationToken);
@@ -69,14 +65,14 @@ public class OAuth2TokenService : BaseInvocable, IOAuth2TokenService
         var requestUrl = UrlConstants.TwitterApiUrl + ApiEndpoints.RevokeTokenEndpoint;
         var developerCredentials = new DeveloperCredentials()
         {
-            ClientId = values["client_id"],
-            ClientSecret = values["secret"],
+            ClientId = values[CredNames.ClientId],
+            ClientSecret = values[CredNames.ClientSecret],
         };
         
         var bodyParameters = new Dictionary<string, string>
         {
             { "token", values["access_token"] },
-            { "client_id", values["client_id"] },
+            { "client_id", values[CredNames.ClientId] },
             { "token_type_hint", "access_token" },
         };
 

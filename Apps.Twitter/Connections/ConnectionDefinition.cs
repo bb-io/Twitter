@@ -1,4 +1,5 @@
-﻿using Blackbird.Applications.Sdk.Common.Authentication;
+﻿using Apps.Twitter.Constants;
+using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Connections;
 
 namespace Apps.Twitter.Connections;
@@ -25,8 +26,8 @@ public class ConnectionDefinition : IConnectionDefinition
             ConnectionUsage = ConnectionUsage.Actions,
             ConnectionProperties = new List<ConnectionProperty>()
             {
-                new("client_id") { DisplayName = "Client ID" },
-                new("secret") { DisplayName = "Secret", Sensitive = true },
+                new(CredNames.ClientId) { DisplayName = "Client ID" },
+                new(CredNames.ClientSecret) { DisplayName = "Secret", Sensitive = true },
             }
         }
     };
