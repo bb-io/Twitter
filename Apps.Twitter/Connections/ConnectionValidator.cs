@@ -15,7 +15,7 @@ public class ConnectionValidator : IConnectionValidator
         
         try
         {
-            await client.SendTwitterRequest(request, cancellationToken);
+            await client.ExecuteAsync(request, cancellationToken);
             return new ConnectionValidationResponse
             {
                 IsValid = true

@@ -95,7 +95,7 @@ public class OAuth2TokenService(InvocationContext invocationContext)
         request.AddHeader("Authorization", authHeader);
         bodyParameters.ToList().ForEach(x => request.AddParameter(x.Key, x.Value));
 
-        return await _twitterClient.SendTwitterRequest(request, cancellationToken);
+        return await _twitterClient.ExecuteAsync(request, cancellationToken);
     }
 
     private async Task<Dictionary<string, string>> GetDictionaryResponse(string requestUrl,
