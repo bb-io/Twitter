@@ -1,11 +1,10 @@
 ﻿using Apps.Twitter.DataSources.Static;
-using Apps.Twitter.Polling.Models.Requests;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Dictionaries;
 
-namespace Apps.Twitter.Models.Requests;
+namespace Apps.Twitter.Polling.Models.Requests;
 
-public class SearchTweetsRequest
+public class SearchTweetsPollingRequest
 {
     [Display("Max results", Description = "Maximum number of results to return. Default is 10")]
     public int? MaxResults { get; set; }
@@ -27,25 +26,4 @@ public class SearchTweetsRequest
 
     [StaticDataSource(typeof(LanguageDataSource))]
     public string? Language { get; set; }
-
-    [Display("Start time")]
-    public DateTime? StartTime { get; set; }
-    
-    [Display("End time")]
-    public DateTime? EndTime { get; set; }
-
-    public SearchTweetsRequest()
-    { }
-
-    public SearchTweetsRequest(SearchTweetsPollingRequest request, DateTime lastInteractionDate)
-    {
-        MaxResults = request.MaxResults;
-        Keywords = request.Keywords;
-        ExactPhraseMatch = request.ExactPhraseMatch;
-        From = request.From;
-        To = request.To;
-        Context = request.Context;
-        Language = request.Language;
-        StartTime = lastInteractionDate;
-    }
 }
