@@ -2,7 +2,7 @@
 using Blackbird.Applications.Sdk.Common.Authentication;
 using RestSharp;
 
-namespace Apps.Twitter.RestSharp;
+namespace Apps.Twitter.Api;
 
 public class TwitterRestRequest : RestRequest
 {

@@ -1,10 +1,10 @@
-﻿using Apps.Twitter.Constants;
+﻿using Apps.Twitter.Api;
+using Apps.Twitter.Constants;
 using Apps.Twitter.Invocables;
 using Apps.Twitter.Models.Requests;
 using Apps.Twitter.Models.Responses;
 using Apps.Twitter.Polling.Models;
 using Apps.Twitter.Polling.Models.Requests;
-using Apps.Twitter.RestSharp;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Common.Polling;
 using RestSharp;

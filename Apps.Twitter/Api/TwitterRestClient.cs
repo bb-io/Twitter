@@ -1,10 +1,11 @@
 ﻿using System.Net;
 using Apps.Twitter.Constants;
+using Apps.Twitter.Dto;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace Apps.Twitter.RestSharp;
+namespace Apps.Twitter.Api;
 
 public class TwitterRestClient() : BlackBirdRestClient(new RestClientOptions { ThrowOnAnyError = true, BaseUrl = new(UrlConstants.TwitterApiUrl) })
 {
@@ -15,6 +16,14 @@ public class TwitterRestClient() : BlackBirdRestClient(new RestClientOptions { T
         if(response.StatusCode == HttpStatusCode.TooManyRequests)
             return new("You've exceeded your requests limit. Please wait approximately 15 min to continue");
 
-        return new Exception($"Status code: {response.StatusCode}, Content: {response.Content}");
+        try
+        {
+            var error = JsonConvert.DeserializeObject<ErrorDto>(response.Content!)!;
+            return new Exception(error.ToString());
+        }
+        catch (Exception e)
+        {
+            return new Exception($"Status code: {response.StatusCode}, Content: {response.Content}");
+        }
     }
 }

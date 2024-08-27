@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Apps.Twitter.Api;
 using Apps.Twitter.Constants;
 using Apps.Twitter.Dto;
-using Apps.Twitter.RestSharp;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication.OAuth2;
 using Blackbird.Applications.Sdk.Common.Invocation;

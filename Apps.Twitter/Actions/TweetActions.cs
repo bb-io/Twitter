@@ -1,9 +1,9 @@
-﻿using Apps.Twitter.Constants;
+﻿using Apps.Twitter.Api;
+using Apps.Twitter.Constants;
 using Apps.Twitter.Invocables;
 using Apps.Twitter.Models.Identifiers;
 using Apps.Twitter.Models.Requests;
 using Apps.Twitter.Models.Responses;
-using Apps.Twitter.RestSharp;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Authentication;
@@ -69,10 +69,29 @@ public class TweetActions(InvocationContext invocationContext)
         return Client.ExecuteWithErrorHandling(apiRequest);
     }
     
-    [Action("Remove tweet", Description = "Remove specified tweet from the page")]
+    [Action("Delete tweet", Description = "Delete specified tweet by id")]
     public Task RemoveTweet([ActionParameter] TweetIdentifier identifier)
     {
         var endpoint = $"{ApiEndpoints.TweetsEndpoint}/{identifier.TweetId}";
+        var request = new TwitterRestRequest(endpoint, Method.Delete, Creds);
+        return Client.ExecuteWithErrorHandling(request);
+    }
+    
+    [Action("Retweet", Description = "Retweet specified tweet by id and user")]
+    public Task Retweet([ActionParameter] UserIdentifier userIdentifier, 
+        [ActionParameter] TweetIdentifier tweetIdentifier)
+    {
+        var endpoint = $"{ApiEndpoints.UsersEndpoint}/{userIdentifier.UserId}/retweets";
+        var apiRequest = new TwitterRestRequest(endpoint, Method.Post, Creds)
+            .AddJsonBody(new { tweet_id = tweetIdentifier.TweetId });
+        return Client.ExecuteWithErrorHandling(apiRequest);
+    }
+    
+    [Action("Unretweet", Description = "Unretweet specified tweet by id and user")]
+    public Task Unretweet([ActionParameter] UserIdentifier userIdentifier, 
+        [ActionParameter] TweetIdentifier tweetIdentifier)
+    {
+        var endpoint = $"{ApiEndpoints.UsersEndpoint}/{userIdentifier.UserId}/retweets/{tweetIdentifier.TweetId}";
         var request = new TwitterRestRequest(endpoint, Method.Delete, Creds);
         return Client.ExecuteWithErrorHandling(request);
     }
