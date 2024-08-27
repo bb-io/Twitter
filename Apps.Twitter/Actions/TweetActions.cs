@@ -6,7 +6,6 @@ using Apps.Twitter.Models.Requests;
 using Apps.Twitter.Models.Responses;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
-using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using RestSharp;
 
@@ -52,7 +51,7 @@ public class TweetActions(InvocationContext invocationContext)
         return Client.ExecuteWithErrorHandling<SearchTweetsResponse>(apiRequest);
     }
     
-    [Action("Get tweet", Description = "Get tweet by specified id")]
+    [Action("Get tweet", Description = "Get tweet by specified ID")]
     public async Task<TweetResponse> GetTweet([ActionParameter] TweetIdentifier identifier)
     {
         var endpoint = $"{ApiEndpoints.TweetsEndpoint}/{identifier.TweetId}";
@@ -73,7 +72,7 @@ public class TweetActions(InvocationContext invocationContext)
         return await GetTweet(new TweetIdentifier { TweetId = response.Data.Id });
     }
     
-    [Action("Delete tweet", Description = "Delete specified tweet by id")]
+    [Action("Delete tweet", Description = "Delete specified tweet by ID")]
     public Task RemoveTweet([ActionParameter] TweetIdentifier identifier)
     {
         var endpoint = $"{ApiEndpoints.TweetsEndpoint}/{identifier.TweetId}";
@@ -98,11 +97,5 @@ public class TweetActions(InvocationContext invocationContext)
         var endpoint = $"{ApiEndpoints.UsersEndpoint}/{userIdentifier.UserId}/retweets/{tweetIdentifier.TweetId}";
         var request = new TwitterRestRequest(endpoint, Method.Delete, Creds);
         return Client.ExecuteWithErrorHandling(request);
-    }
-
-    [Action("[DEBUG] Action", Description = "Action for debugging purposes")]
-    public List<AuthenticationCredentialsProvider> DebugAction()
-    {
-        return Creds.ToList();
     }
 }
