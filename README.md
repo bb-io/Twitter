@@ -13,7 +13,9 @@ Before you can connect you need to make sure that:
 - You have a X account and you have the credentials to access it.
 - You have `Client ID` and `Client Secret` for the X API.
 
-You can find the instructions on how to create a new app and get the `Client ID` and `Client Secret` [here](https://developer.x.com/en/docs/authentication/oauth-1-0a/api-key-and-secret).
+You can find the instructions on how to create a new app and get the `Client ID` and `Client Secret` [here](https://developer.x.com/en/docs/authentication/oauth-1-0a/api-key-and-secret). After creating the app, you should go to the `User authentication settings` section, click on `Edit` button and under the `App info` set the `Callback URI / Redirect URL` field to https://bridge.blackbird.io/api/AuthorizationCode. This is necessary for the OAuth2.0 authentication to work. Also, set any website URL in the `Website URL` field (e.g. https://blackbird.io). 
+
+After completing the above steps, you should have the `Client ID` and `Client Secret` under `Keys and tokens` section in `OAuth 2.0 Client ID and Client Secret` field.
 
 ## Connecting
 
