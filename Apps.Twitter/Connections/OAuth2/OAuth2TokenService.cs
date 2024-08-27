@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json;
+using Apps.Twitter.Api;
 using Apps.Twitter.Constants;
 using Apps.Twitter.Dto;
-using Apps.Twitter.RestSharp;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication.OAuth2;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -95,7 +95,7 @@ public class OAuth2TokenService(InvocationContext invocationContext)
         request.AddHeader("Authorization", authHeader);
         bodyParameters.ToList().ForEach(x => request.AddParameter(x.Key, x.Value));
 
-        return await _twitterClient.SendTwitterRequest(request, cancellationToken);
+        return await _twitterClient.ExecuteAsync(request, cancellationToken);
     }
 
     private async Task<Dictionary<string, string>> GetDictionaryResponse(string requestUrl,

@@ -7,4 +7,7 @@ public static class ApiEndpoints
     
     
     public const string TweetsEndpoint = "/tweets";
+    public const string SearchTweetsEndpoint = "/tweets/search/recent";
+    
+    public const string UsersEndpoint = "/users";
 }
