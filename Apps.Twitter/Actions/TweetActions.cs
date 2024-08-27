@@ -25,7 +25,7 @@ public class TweetActions(InvocationContext invocationContext)
 
         if (request.Keywords != null && request.Keywords.Any())
         {
-            var query = request.ExactPhraseMatch 
+            var query = request.ExactPhraseMatch.HasValue && request.ExactPhraseMatch.Value 
                 ? "\"" + string.Join(" ", request.Keywords) + "\"" 
                 : string.Join(" OR ", request.Keywords);
             apiRequest.AddQueryParameter("query", query);
@@ -50,6 +50,15 @@ public class TweetActions(InvocationContext invocationContext)
             apiRequest.AddQueryParameter("end_time", request.EndTime.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"));
 
         return Client.ExecuteWithErrorHandling<SearchTweetsResponse>(apiRequest);
+    }
+    
+    [Action("Get tweet", Description = "Get tweet by specified id")]
+    public Task<TweetResponse> GetTweet([ActionParameter] TweetIdentifier identifier)
+    {
+        var endpoint = $"{ApiEndpoints.TweetsEndpoint}/{identifier.TweetId}";
+        var request = new TwitterRestRequest(endpoint, Method.Get, Creds)
+            .AddQueryParameter("tweet.fields", "article,attachments,author_id,card_uri,context_annotations,conversation_id,created_at,edit_history_tweet_ids");
+        return Client.ExecuteWithErrorHandling<TweetResponse>(request);
     }
     
     [Action("Create tweet", Description = "Create tweet on your twitter page")]

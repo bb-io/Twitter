@@ -13,7 +13,7 @@ public class SearchTweetsRequest
     public IEnumerable<string>? Keywords { get; set; }
 
     [Display("Exact phrase match", Description = "Matches the exact phrase within the body of a Post.")]
-    public bool ExactPhraseMatch { get; set; }
+    public bool? ExactPhraseMatch { get; set; }
 
     [Display("From", Description = "\tMatches any Post from a specific user. The value can be either the username (excluding the @ character) or the user’s numeric user ID.")]
     public string? From { get; set; }
