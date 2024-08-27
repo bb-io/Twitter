@@ -53,20 +53,24 @@ public class TweetActions(InvocationContext invocationContext)
     }
     
     [Action("Get tweet", Description = "Get tweet by specified id")]
-    public Task<TweetResponse> GetTweet([ActionParameter] TweetIdentifier identifier)
+    public async Task<TweetResponse> GetTweet([ActionParameter] TweetIdentifier identifier)
     {
         var endpoint = $"{ApiEndpoints.TweetsEndpoint}/{identifier.TweetId}";
         var request = new TwitterRestRequest(endpoint, Method.Get, Creds)
             .AddQueryParameter("tweet.fields", "article,attachments,author_id,card_uri,context_annotations,conversation_id,created_at,edit_history_tweet_ids");
-        return Client.ExecuteWithErrorHandling<TweetResponse>(request);
+        var response = await Client.ExecuteWithErrorHandling<BaseSingleResponse<TweetResponse>>(request);
+        return response.Data;
     }
     
     [Action("Create tweet", Description = "Create tweet on your twitter page")]
-    public Task CreateTweet([ActionParameter] CreateTweetRequest request)
+    public async Task<TweetResponse> CreateTweet([ActionParameter] CreateTweetRequest request)
     {
         var apiRequest = new TwitterRestRequest(ApiEndpoints.TweetsEndpoint, Method.Post, Creds)
             .AddJsonBody(new { text = request.Text });
-        return Client.ExecuteWithErrorHandling(apiRequest);
+        var response = await Client.ExecuteWithErrorHandling<BaseSingleResponse<TweetResponse>>(apiRequest);
+        
+        // Response doesn't contain all tweet fields so we need to get it again
+        return await GetTweet(new TweetIdentifier { TweetId = response.Data.Id });
     }
     
     [Action("Delete tweet", Description = "Delete specified tweet by id")]
