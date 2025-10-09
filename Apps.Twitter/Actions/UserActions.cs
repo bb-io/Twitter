@@ -10,7 +10,7 @@ using RestSharp;
 
 namespace Apps.Twitter.Actions;
 
-[ActionList]
+[ActionList("User")]
 public class UserActions(InvocationContext invocationContext)
     : TwitterInvocable(invocationContext)
 {

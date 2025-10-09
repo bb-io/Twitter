@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Apps.Twitter.Constants;
 using Apps.Twitter.Dto;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
 using Newtonsoft.Json;
 using RestSharp;
@@ -19,11 +20,11 @@ public class TwitterRestClient() : BlackBirdRestClient(new RestClientOptions { T
         try
         {
             var error = JsonConvert.DeserializeObject<ErrorDto>(response.Content!)!;
-            return new Exception(error.ToString());
+            return new PluginApplicationException(error.ToString());
         }
         catch (Exception e)
         {
-            return new Exception($"Status code: {response.StatusCode}, Content: {response.Content}");
+            return new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
     }
 }
