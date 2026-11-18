@@ -6,7 +6,7 @@ Blackbird is the new automation backbone for the language technology industry. B
 
 <!-- begin docs -->
 
-X (formerly Twitter) is the place to see and join the conversation on what's happening in the world. Follow your interests, share your thoughts, and connect with millions of people.
+X (formerly Twitter) is a social media platform for sharing and discovering posts. Use this app to search, publish, and manage posts, look up users by username, and trigger Blackbird workflows when new posts match your search.
 
 ## Before setting up
 
