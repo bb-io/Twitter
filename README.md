@@ -4,7 +4,9 @@ Blackbird is the new automation backbone for the language technology industry. B
 
 ## Introduction
 
-X is the place to see and join the conversation on what's happening in the world. Follow your interests, share your thoughts, and connect with millions of people.
+<!-- begin docs -->
+
+X (formrly Twitter) is the place to see and join the conversation on what's happening in the world. Follow your interests, share your thoughts, and connect with millions of people.
 
 ## Before setting up
 
