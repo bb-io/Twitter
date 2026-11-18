@@ -4,7 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Product>X</Product>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
     <Description>Formerly Twitter. Social networking and microblogging service</Description>
     <AssemblyName>Apps.Twitter</AssemblyName>
   </PropertyGroup>
